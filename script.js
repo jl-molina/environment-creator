@@ -36,6 +36,15 @@ let arr_delete_cta_his_marca = [];
 let arr_delete_cta_act_marca = [];
 let arr_delete_cta_excep_marca = [];
 let arr_update_pser_tr_notif_tipo_retiro = [];
+let arr_update_mae_plataforma_retirosdesempleoimss = [];
+let arr_delete_rec_solicitud = [];
+let arr_delete_ret_beneficiario = [];
+let arr_delete_ret_parcial_resol = [];
+let arr_delete_ret_sellosbiometricos_suv = [];
+let arr_delete_ret_parcial = [];
+let arr_delete_ret_parcial_tx = [];
+let arr_delete_ret_bus_diag12 = [];
+let arr_delete_retmotivoretiro = [];
 
 
 // pser_tr_notif_cert_matrimonio
@@ -286,7 +295,95 @@ function update_pser_tr_notif_tipo_retiro (nss){
     });
 }
 
+function update_mae_plataforma_retirosdesempleoimss (nss){
+    for (let i = 1; i <= 4000; i ++) {
+        arr_update_mae_plataforma_retirosdesempleoimss.push([`update mae_plataforma_retirosdesempleoimss set num_estadoregistro = 1 where num_nss = '${++nss}';`]);
+    }
+    csv.stringify(arr_update_mae_plataforma_retirosdesempleoimss, (err, output) => {
+        fs.writeFileSync("csv-files/update_mae_plataforma_retirosdesempleoimss.csv", output);
+        console.log("update_mae_plataforma_retirosdesempleoimss - OK");
+    });
+}
 
+function delete_ret_beneficiario(nss) {
+    for (let i = 1; i <= 4000; i ++) {
+        arr_delete_ret_beneficiario.push([`delete from ret_beneficiario where nss = '${nss}';`]);
+    }
+    csv.stringify(arr_delete_ret_beneficiario, (err, output) => {
+        fs.writeFileSync("csv-files/delete_ret_beneficiario.csv", output);
+        console.log("delete_ret_beneficiario - OK");
+    });
+}
+
+function delete_rec_solicitud(nss) {
+    for (let i = 1; i <= 4000; i ++) {
+        arr_delete_rec_solicitud.push([`delete from rec_solicitud where n_seguro = '${nss}';`]);
+    }
+    csv.stringify(arr_delete_rec_solicitud, (err, output) => {
+        fs.writeFileSync("csv-files/delete_rec_solicitud.csv", output);
+        console.log("delete_rec_solicitud - OK");
+    });
+}
+
+function delete_ret_parcial_resol(nss) {
+    for (let i = 1; i <= 4000; i ++) {
+        arr_delete_ret_parcial_resol.push([`delete from ret_parcial_resol where nss = '${nss}';`]);
+    }
+    csv.stringify(arr_delete_ret_parcial_resol, (err, output) => {
+        fs.writeFileSync("csv-files/delete_ret_parcial_resol.csv", output);
+        console.log("delete_ret_parcial_resol - OK");
+    });
+}
+
+function delete_ret_sellosbiometricos_suv(nss) {
+    for (let i = 1; i <= 4000; i ++) {
+        arr_delete_ret_sellosbiometricos_suv.push([`delete from ret_sellosbiometricos_suv where nss = '${nss}';`]);
+    }
+    csv.stringify(arr_delete_ret_sellosbiometricos_suv, (err, output) => {
+        fs.writeFileSync("csv-files/delete_ret_sellosbiometricos_suv.csv", output);
+        console.log("delete_ret_sellosbiometricos_suv - OK");
+    });
+}
+
+function delete_ret_parcial(nss) {
+    for (let i = 1; i <= 4000; i ++) {
+        arr_delete_ret_parcial.push([`delete from ret_parcial where nss = '${nss}';`]);
+    }
+    csv.stringify(arr_delete_ret_parcial, (err, output) => {
+        fs.writeFileSync("csv-files/delete_ret_parcial.csv", output);
+        console.log("delete_ret_parcial - OK");
+    });
+}
+
+function delete_ret_parcial_tx(nss) {
+    for (let i = 1; i <= 4000; i ++) {
+        arr_delete_ret_parcial_tx.push([`delete from ret_parcial_tx where nss = '${nss}';`]);
+    }
+    csv.stringify(arr_delete_ret_parcial_tx, (err, output) => {
+        fs.writeFileSync("csv-files/delete_ret_parcial_tx.csv", output);
+        console.log("delete_ret_parcial_tx - OK");
+    });
+}
+
+function delete_ret_bus_diag12(nss) {
+    for (let i = 1; i <= 4000; i ++) {
+        arr_delete_ret_bus_diag12.push([`delete from ret_bus_diag12 where nss = '${nss}';`]);
+    }
+    csv.stringify(arr_delete_ret_bus_diag12, (err, output) => {
+        fs.writeFileSync("csv-files/delete_ret_bus_diag12.csv", output);
+        console.log("delete_ret_bus_diag12 - OK");
+    });
+}
+
+function delete_retmotivoretiro(nss) {
+    for (let i = 1; i <= 4000; i ++) {
+        arr_delete_retmotivoretiro.push([`delete from retmotivoretiro where nss = '${nss}';`]);
+    }
+    csv.stringify(arr_delete_retmotivoretiro, (err, output) => {
+        fs.writeFileSync("csv-files/delete_retmotivoretiro.csv", output);
+        console.log("delete_retmotivoretiro - OK");
+    });
+}
 
 
 //Ambiente general del python para que se pueda correr por primera vez
@@ -316,4 +413,13 @@ delete_pser_tr_notif_tipo_retiro(initial_nss);
     //Notificaciones
     update_pser_tr_notif_tipo_retiro(initial_nss);
 
-
+//Ambientar para op13
+    update_mae_plataforma_retirosdesempleoimss(initial_nss);
+    delete_ret_beneficiario(initial_nss);
+    delete_rec_solicitud(initial_nss);
+    delete_ret_parcial_resol(initial_nss);
+    delete_ret_sellosbiometricos_suv(initial_nss);
+    delete_ret_parcial(initial_nss);
+    delete_ret_parcial_tx(initial_nss);
+    delete_ret_bus_diag12(initial_nss);
+    delete_retmotivoretiro(initial_nss);

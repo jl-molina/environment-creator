@@ -23,6 +23,20 @@ let recserviciosafore = [];
 let tbcontrolps = [];
 let arr_delete_pser_tr_notif_tipo_retiro = [];
 
+let arr_update_recserviciosafore = [];
+let arr_update_tbcontrolps = [];
+let arr_delete_mae_plataforma_retirosdesempleoimss = [];
+let arr_delete_tmp_platserv_rec_solicitud = [];
+let arr_delete_tmp_platserv_ret_parcial_resol = [];
+let arr_delete_tmp_platserv_ret_parcial = [];
+let arr_delete_tmp_platserv_ret_sellosbiometricos_suv = [];
+let arr_delete_tmp_platserv_retmotivoretiro = [];
+let arr_delete_tmp_platserv_ret_parcial_tx = [];
+let arr_delete_cta_his_marca = [];
+let arr_delete_cta_act_marca = [];
+let arr_delete_cta_excep_marca = [];
+let arr_update_pser_tr_notif_tipo_retiro = [];
+
 
 // pser_tr_notif_cert_matrimonio
 function create_data_pser_tr_notif_cert_matrimonio(id_notif_cert_matrimonio, i_ch_folio, nss, ch_numero_resolucion) {
@@ -140,6 +154,142 @@ function delete_pser_tr_notif_tipo_retiro(nss) {
     });
 }
 
+function update_recserviciosafore (nss){
+    for (let i = 1; i <= 4000; i ++) {
+        arr_update_recserviciosafore.push([`update recserviciosafore set codigotermino = 9 where nss = '${++nss
+        }';`]);
+    }
+    csv.stringify(arr_update_recserviciosafore, (err, output) => {
+        fs.writeFileSync("csv-files/update_recserviciosafore.csv", output);
+        console.log("update_recserviciosafore - OK");
+    });
+}
+
+function update_tbcontrolps (nss){
+    for (let i = 1; i <= 4000; i ++) {
+        arr_update_tbcontrolps.push([`update tbcontrolps set replicasafreplatserv = 0,tiposerviciointerno = '1025',fechaalta = current_date-1 where nss = '${++nss
+        }';`]);
+    }
+    csv.stringify(arr_update_tbcontrolps, (err, output) => {
+        fs.writeFileSync("csv-files/update_tbcontrolps.csv", output);
+        console.log("update_tbcontrolps - OK");
+    });
+}
+
+function delete_mae_plataforma_retirosdesempleoimss(folioServicio) {
+    for (let i = 1; i <= 4000; i ++) {
+        arr_delete_mae_plataforma_retirosdesempleoimss.push([`delete from mae_plataforma_retirosdesempleoimss where fol_servicio = '${++folioServicio}';`]);
+    }
+    csv.stringify(arr_delete_mae_plataforma_retirosdesempleoimss, (err, output) => {
+        fs.writeFileSync("csv-files/delete_mae_plataforma_retirosdesempleoimss.csv", output);
+        console.log("delete_mae_plataforma_retirosdesempleoimss - OK");
+    });
+}
+
+function delete_tmp_platserv_rec_solicitud(folioServicio) {
+    for (let i = 1; i <= 4000; i ++) {
+        arr_delete_tmp_platserv_rec_solicitud.push([`delete from tmp_platserv_rec_solicitud where folio_rec = '${++folioServicio}';`]);
+    }
+    csv.stringify(arr_delete_tmp_platserv_rec_solicitud, (err, output) => {
+        fs.writeFileSync("csv-files/delete_tmp_platserv_rec_solicitud.csv", output);
+        console.log("delete_tmp_platserv_rec_solicitud - OK");
+    });
+}
+
+function delete_tmp_platserv_ret_parcial_resol(i_ch_folio) {
+    for (let i = 1; i <= 4000; i ++) {
+        arr_delete_tmp_platserv_ret_parcial_resol.push([`delete from tmp_platserv_ret_parcial_resol where folio_t_procesar = '${ch_folio + (++i_ch_folio)}';`]);
+    }
+    csv.stringify(arr_delete_tmp_platserv_ret_parcial_resol, (err, output) => {
+        fs.writeFileSync("csv-files/delete_tmp_platserv_ret_parcial_resol.csv", output);
+        console.log("delete_tmp_platserv_ret_parcial_resol - OK");
+    });
+}
+
+function delete_tmp_platserv_ret_parcial(i_ch_folio) {
+    for (let i = 1; i <= 4000; i ++) {
+        arr_delete_tmp_platserv_ret_parcial.push([`delete from tmp_platserv_ret_parcial where folio_t_procesar = '${ch_folio + (++i_ch_folio)}';`]);
+    }
+    csv.stringify(arr_delete_tmp_platserv_ret_parcial, (err, output) => {
+        fs.writeFileSync("csv-files/delete_tmp_platserv_ret_parcial.csv", output);
+        console.log("delete_tmp_platserv_ret_parcial - OK");
+    });
+}
+
+function delete_tmp_platserv_ret_sellosbiometricos_suv(nss) {
+    for (let i = 1; i <= 4000; i ++) {
+        arr_delete_tmp_platserv_ret_sellosbiometricos_suv.push([`delete from tmp_platserv_ret_sellosbiometricos_suv where nss = '${nss}';`]);
+    }
+    csv.stringify(arr_delete_tmp_platserv_ret_sellosbiometricos_suv, (err, output) => {
+        fs.writeFileSync("csv-files/delete_tmp_platserv_ret_sellosbiometricos_suv.csv", output);
+        console.log("delete_tmp_platserv_ret_sellosbiometricos_suv - OK");
+    });
+}
+
+function delete_tmp_platserv_retmotivoretiro(nss) {
+    for (let i = 1; i <= 4000; i ++) {
+        arr_delete_tmp_platserv_retmotivoretiro.push([`delete from tmp_platserv_retmotivoretiro where nss = '${nss}';`]);
+    }
+    csv.stringify(arr_delete_tmp_platserv_retmotivoretiro, (err, output) => {
+        fs.writeFileSync("csv-files/delete_tmp_platserv_retmotivoretiro.csv", output);
+        console.log("delete_tmp_platserv_retmotivoretiro - OK");
+    });
+}
+
+function delete_tmp_platserv_ret_parcial_tx(nss) {
+    for (let i = 1; i <= 4000; i ++) {
+        arr_delete_tmp_platserv_ret_parcial_tx.push([`delete from tmp_platserv_ret_parcial_tx where nss = '${nss}';`]);
+    }
+    csv.stringify(arr_delete_tmp_platserv_ret_parcial_tx, (err, output) => {
+        fs.writeFileSync("csv-files/delete_tmp_platserv_ret_parcial_tx.csv", output);
+        console.log("delete_tmp_platserv_ret_parcial_tx - OK");
+    });
+}
+
+function delete_cta_his_marca(nss) {
+    for (let i = 1; i <= 4000; i ++) {
+        arr_delete_cta_his_marca.push([`delete from cta_his_marca where nss = '${nss}';`]);
+    }
+    csv.stringify(arr_delete_cta_his_marca, (err, output) => {
+        fs.writeFileSync("csv-files/delete_cta_his_marca.csv", output);
+        console.log("delete_cta_his_marca - OK");
+    });
+}
+
+function delete_cta_act_marca(nss) {
+    for (let i = 1; i <= 4000; i ++) {
+        arr_delete_cta_act_marca.push([`delete from cta_act_marca where nss = '${nss}';`]);
+    }
+    csv.stringify(arr_delete_cta_act_marca, (err, output) => {
+        fs.writeFileSync("csv-files/delete_cta_act_marca.csv", output);
+        console.log("delete_cta_act_marca - OK");
+    });
+}
+
+function delete_cta_excep_marca(nss) {
+    for (let i = 1; i <= 4000; i ++) {
+        arr_delete_cta_excep_marca.push([`delete from cta_excep_marca where nss = '${nss}';`]);
+    }
+    csv.stringify(arr_delete_cta_excep_marca, (err, output) => {
+        fs.writeFileSync("csv-files/delete_cta_excep_marca.csv", output);
+        console.log("delete_cta_excep_marca - OK");
+    });
+}
+
+function update_pser_tr_notif_tipo_retiro (nss){
+    for (let i = 1; i <= 4000; i ++) {
+        arr_update_pser_tr_notif_tipo_retiro.push([`update pser_tr_notif_tipo_retiro set nu_replicado = 0 where nss = '${++nss}';`]);
+    }
+    csv.stringify(arr_update_pser_tr_notif_tipo_retiro, (err, output) => {
+        fs.writeFileSync("csv-files/update_pser_tr_notif_tipo_retiro.csv", output);
+        console.log("update_pser_tr_notif_tipo_retiro - OK");
+    });
+}
+
+
+
+
+//Ambiente general del python para que se pueda correr por primera vez
 create_pser_tr_notif_cert_matrimonio();
 create_pser_tr_notif_exp_electronico();
 create_pser_tr_notif_tipo_retiro();
@@ -147,3 +297,23 @@ create_pser_tr_notif_ret_desempleo();
 create_recserviciosafore();
 create_tbcontrolps();
 delete_pser_tr_notif_tipo_retiro(initial_nss);
+
+//Ambiente para poder volver a correr el python
+    //Aforeglobal
+    update_recserviciosafore(initial_nss);
+    update_tbcontrolps(initial_nss);
+    //Informix
+    delete_mae_plataforma_retirosdesempleoimss(initial_ch_folio_servicio);
+    delete_tmp_platserv_rec_solicitud(initial_ch_folio_servicio);
+    delete_tmp_platserv_ret_parcial_resol(initial_ch_folio);
+    delete_tmp_platserv_ret_parcial(initial_ch_folio);
+    delete_tmp_platserv_ret_sellosbiometricos_suv(initial_nss);
+    delete_tmp_platserv_retmotivoretiro(initial_nss);
+    delete_tmp_platserv_ret_parcial_tx(initial_nss);
+    delete_cta_his_marca(initial_nss);
+    delete_cta_act_marca(initial_nss);
+    delete_cta_excep_marca(initial_nss);
+    //Notificaciones
+    update_pser_tr_notif_tipo_retiro(initial_nss);
+
+

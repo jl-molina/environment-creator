@@ -19,9 +19,9 @@ let pser_tr_notif_cert_matrimonio = [];
 let pser_tr_notif_exp_electronico = [];
 let pser_tr_notif_tipo_retiro = [];
 let pser_tr_notif_ret_desempleo = [];
-
 let recserviciosafore = [];
 let tbcontrolps = [];
+let arr_delete_pser_tr_notif_tipo_retiro = [];
 
 
 // pser_tr_notif_cert_matrimonio
@@ -111,8 +111,8 @@ function create_recserviciosafore() {
     csv.stringify(recserviciosafore, (err, output) => {
         fs.writeFileSync("csv-files/recserviciosafore.csv", output);
         console.log("recserviciosafore - OK");
-    }
-)}
+    });
+}
     
 // tbcontrolps
 function create_data_tbcontrolps(keyx, nss, folioServicio,i_ch_folio) {
@@ -126,8 +126,19 @@ function create_tbcontrolps() {
     csv.stringify(tbcontrolps, (err, output) => {
         fs.writeFileSync("csv-files/tbcontrolps.csv", output);
         console.log("tbcontrolps - OK");
+    });
+}
+
+function delete_pser_tr_notif_tipo_retiro(nss) {
+    for (let i = 1; i <= 4000; i ++) {
+        arr_delete_pser_tr_notif_tipo_retiro.push([`delete from pser_tr_notif_tipo_retiro where nss = '${++nss
+        }';`]);
     }
-)}
+    csv.stringify(arr_delete_pser_tr_notif_tipo_retiro, (err, output) => {
+        fs.writeFileSync("csv-files/delete_pser_tr_notif_tipo_retiro.csv", output);
+        console.log("delete_pser_tr_notif_tipo_retiro - OK");
+    });
+}
 
 create_pser_tr_notif_cert_matrimonio();
 create_pser_tr_notif_exp_electronico();
@@ -135,4 +146,4 @@ create_pser_tr_notif_tipo_retiro();
 create_pser_tr_notif_ret_desempleo();
 create_recserviciosafore();
 create_tbcontrolps();
-
+delete_pser_tr_notif_tipo_retiro(initial_nss);
